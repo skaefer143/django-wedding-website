@@ -5,29 +5,61 @@
     <script src="//code.jquery.com/jquery.min.js"></script>
     <script src="{% static "Minimalist-Countdown-Timer-Plugin-jQuery/js/countdown.js" %}"></script>
 {% endblock %}
-{% block page_head %}<link rel="stylesheet" type="text/css" href="{%  static "Minimalist-Countdown-Timer-Plugin-jQuery/css/countdown.css" %}" />{% endblock %}
+{% block page_head %}
+    <link href='https://fonts.googleapis.com/css?family=Lato:300|Grand+Hotel' rel='stylesheet'>
+    <link rel="stylesheet" type="text/css"
+          href="{% static "Minimalist-Countdown-Timer-Plugin-jQuery/css/countdown.css" %}"/>
+{% endblock %}
 
 {% block page_content %}
 
-<style>
-  body { text-align: center; padding: 150px 25px; width: 100%;}
-  h1 { font-size: 50px; }
-  body { font: 20px Helvetica, sans-serif; color: #333; }
-  .content > div { display: contents; text-align: center; width: 650px; margin: 0 auto; }
-  a { color: #dc8100; text-decoration: none; }
-  a:hover { color: #333; text-decoration: none; }
+    <style>
+        .fancy {
+            font-family: 'Grand Hotel';
+        }
 
-</style>
+        body {
+            text-align: center;
+            padding: 150px 25px;
+            width: 100%;
+            font-size: 20px;
+            font-family: 'Lato';
+            color: #333;
+        }
 
-<div class="content" >
-    <h1>Storm and Elise are getting married!</h1>
-    <h2>December 28, 2019</h2>
-    <div class='countdown' data-date="2019-12-28" data-time="12:00"></div>
-    <div>
-        <p>Soon, this website will be full of any information you might need. I'm working on it!</p>
-        <p>-Storm</p>
+        h1 {
+            font-size: 50px;
+        }
+
+        .content {
+            display: contents;
+            text-align: center;
+            width: 650px;
+            margin: 0 auto;
+
+        }
+
+        a {
+            color: #dc8100;
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: #333;
+            text-decoration: none;
+        }
+
+    </style>
+
+    <div class="content">
+        <h1>Storm and Elise are getting <span class="fancy">married!</span></h1>
+        <h2>December 28th, 2019</h2>
+        <div class='countdown' data-date="2019-12-28" data-time="12:00"></div>
+        <div>
+            <p>Soon, this website will be full of any information you might need. I'm working on it!</p>
+            <p>-Storm</p>
+        </div>
     </div>
-</div>
 
 {% endblock %}
 {% block page_footer %}{% endblock %}
