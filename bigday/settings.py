@@ -78,8 +78,12 @@ WSGI_APPLICATION = 'bigday.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'wedding',
+        'USER': 'skaefer',
+        'PASSWORD': 'test123',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
     }
 }
 
@@ -127,18 +131,18 @@ STATICFILES_DIRS = (
 )
 
 # the address your emails (save the dates/invites/etc.) will come from
-DEFAULT_WEDDING_FROM_EMAIL = 'You and Your Partner <happilyeverafter@example.com>'
+DEFAULT_WEDDING_FROM_EMAIL = 'stormandelise@gmail.com'
 # the default reply-to of your emails
-DEFAULT_WEDDING_REPLY_EMAIL = 'happilyeverafter@example.com'
+DEFAULT_WEDDING_REPLY_EMAIL = 'stormandelise@gmail.com'
 
 # when sending test emails it will use this address
 DEFAULT_WEDDING_TEST_EMAIL = DEFAULT_WEDDING_FROM_EMAIL
 
 # This is used in a few places where the names of the couple are used
-BRIDE_AND_GROOM = 'Cory and Rowena'
+BRIDE_AND_GROOM = 'Storm and Elise'
 
 # This is used in links in save the date / invitations
-WEDDING_WEBSITE_URL = 'http://thehappycouple.com'
+WEDDING_WEBSITE_URL = 'http://stormandelise.com'
 WEDDING_CC_LIST = []  # put email addresses here if you want to cc someone on all your invitations
 
 # change to a real email backend in production
