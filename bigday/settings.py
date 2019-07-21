@@ -148,6 +148,8 @@ WEDDING_CC_LIST = []  # put email addresses here if you want to cc someone on al
 # change to a real email backend in production
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
+WIP_PAGE = True  # Set to False when not working on the WIP Page.
+
 try:
     from .localsettings import *
 except ImportError:

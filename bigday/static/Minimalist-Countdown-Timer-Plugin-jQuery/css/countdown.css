@@ -1,0 +1,30 @@
+.countdown {
+
+}
+
+.countdown > div {
+    display: inline-block;
+    margin: 20px 5px;
+}
+
+.countdown > div > span {
+    display: block;
+    text-align: center;
+}
+
+.countdown-container {
+    margin: 0 3px;
+}
+
+.countdown-container .countdown-heading {
+    font-size: 16px;
+    margin: 0px;
+}
+
+.countdown-container .countdown-value {
+    font-size: 60px;
+    background: #ffffff;
+    padding: 10px;
+    font-weight: bold;
+    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.4)
+}
