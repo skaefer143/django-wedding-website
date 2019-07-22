@@ -37,6 +37,14 @@
         }
     );
 
+    // Fit Text Plugin for Main Header
+    $("h2").fitText(
+        2.0, {
+            minFontSize: '20px',
+            maxFontSize: '45px'
+        }
+    );
+
     // Offset for Main Navigation - this turns the nav bar white
     $('#mainNav').affix({
         offset: {

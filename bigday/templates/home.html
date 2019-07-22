@@ -3,6 +3,9 @@
 {% block page_head %}
     <!-- Custom CSS -->
     <link href="{% static 'bigday/css/creative.css' %}" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Lato:300|Grand+Hotel' rel='stylesheet'>
+    <link rel="stylesheet" type="text/css"
+          href="{% static "Minimalist-Countdown-Timer-Plugin-jQuery/css/countdown.css" %}"/>
 {% endblock %}
 {% block page_content %}
     <nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
@@ -15,7 +18,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand page-scroll" href="#page-top">Cory and Rowena's Big Day</a>
+                <a class="navbar-brand page-scroll" href="#page-top">{{ groom_and_bride }}'s Wedding</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -24,13 +27,16 @@
                         <a class="page-scroll" href="#main-header">Home</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#event">Event</a>
+                        <a class="page-scroll" href="#ceremony">Ceremony</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#niagara">Niagara-on-the-Lake</a>
+                        <a class="page-scroll" href="#reception">Reception</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#other-stuff">Everything Else</a>
+                        <a class="page-scroll" href="#other-stuff">Bridal Party</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#story">Story</a>
                     </li>
                     <li>
                         <a class="page-scroll" href="#contact">Contact</a>
@@ -45,7 +51,8 @@
     <header id="main-header">
         <div class="header-content">
             <div class="header-content-inner">
-                <h1>We did it!!</h1>
+                <h1>{{ groom_and_bride }} are getting <span class="fancy">married!</span></h1>
+                <h2>December 28th, 2019</h2>
                 {% comment %}
                 <hr>
                 <h2>It's wedding week!</h2>
@@ -55,29 +62,27 @@
                 {% endcomment %}
             </div>
         </div>
+        <div class='countdown' data-date="2019-12-28" data-time="12:00"></div>
     </header>
     <section class="bg-info" id="welcome">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 text-center">
-                    <h2 class="section-heading">Welcome!</h2>
+                    <h2 class="section-heading fancy" style="font-size: 3em;">Welcome!</h2>
                     <hr>
                     <p>
-                        Hello friends and family! It's the week of the wedding!
+                        Hello friends and family! We're so excited for you all to be a part of our special day!
                     </p>
                     <p>
-                        If you're looking for information about the event, look no further!
-                        Please see below for all the details regarding <a href="#event" class="page-scroll">Friday night's welcome party</a> and <a href="#saturday-event" class="page-scroll">Saturday's event</a>.
-                    </p>
-                    <p>
-                        To get added to the wedding whatsapp group first create an account and then send an
-                        email to <a href="mailto:{{ support_email }}">{{ support_email }}</a>.
-                        Also, the current front-runner for the wedding hashtag (if you're into that sort of thing) is #getlukky.
+                        If you're looking for information about our event, look no further!
+                        Please see below for all the details regarding <a href="#ceremony" class="page-scroll">the
+                        ceremony at {{ ceremony_location_name }}</a> and
+                        <a href="#reception" class="page-scroll">the reception at {{ reception_location_name }}</a>.
                     </p>
                     <p>
                         Looking forward to seeing everyone soon!
                     </p>
-                    <p class="pull-right">- Cory and Rowena</p>
+                    <p class="pull-right">- {{ groom_and_bride }}</p>
                 </div>
             </div>
         </div>
@@ -86,24 +91,24 @@
         <div class="container-fluid">
             <div class="row no-gutter">
                 <div class="col-lg-4 col-sm-6">
-                    <a href="#event" class="portfolio-box page-scroll">
+                    <a href="#ceremony" class="portfolio-box page-scroll">
                         <img src="{% static 'bigday/images/ravine-nav.jpg' %}" class="img-responsive" alt="">
                         <div class="portfolio-box-caption">
                             <div class="portfolio-box-caption-content">
                                 <div class="project-name">
-                                    The Event
+                                    The Ceremony
                                 </div>
                             </div>
                         </div>
                     </a>
                 </div>
                 <div class="col-lg-4 col-sm-6">
-                    <a href="#niagara" class="portfolio-box page-scroll">
+                    <a href="#reception" class="portfolio-box page-scroll">
                         <img src="{% static 'bigday/images/prince-of-wales-hotel-nav.jpg' %}" class="img-responsive" alt="">
                         <div class="portfolio-box-caption">
                             <div class="portfolio-box-caption-content">
                                 <div class="project-name">
-                                    Niagara-on-the-Lake
+                                    The Reception
                                 </div>
                             </div>
                         </div>
@@ -124,16 +129,14 @@
             </div>
         </div>
     </section>
-    {% include 'partials/event.html' %}
-    <section id="niagara">
-        {% include 'partials/niagara.html' %}
-    </section>
-{% comment %}
-        {% include 'partials/wedding-party.html' %}
-{% endcomment %}
+    {% include 'partials/ceremony.html' %}
+    {% include 'partials/niagara.html' %}
+    {% include 'partials/wedding-party.html' %}
+        {% comment %}
     <section id="other-stuff" class="bg-primary">
         {% include 'partials/misc.html' %}
     </section>
+    {% endcomment %}
     <section id="gifts">
         {% include 'partials/gifts.html' %}
     </section>
@@ -141,7 +144,7 @@
         {% include 'partials/story.html' %}
     </section>
     {% include 'partials/proposal.html' %}
-    {% include 'partials/save-the-dates.html' %}
+{#    {% include 'partials/save-the-dates.html' %}#}
     <section id="contact" class="bg-dark">
         <div class="container">
             <div class="row">
@@ -167,4 +170,7 @@
     <script src="{% static 'creative/js/jquery.fittext.js' %}"></script>
     <!-- Custom Theme JavaScript -->
     <script src="{% static 'creative/js/creative.js' %}"></script>
+    <!-- Countdown Timer JS -->
+    <script src="//code.jquery.com/jquery.min.js"></script>
+    <script src="{% static "Minimalist-Countdown-Timer-Plugin-jQuery/js/countdown.js" %}"></script>
 {% endblock %}

@@ -139,7 +139,7 @@ DEFAULT_WEDDING_REPLY_EMAIL = 'stormandelise@gmail.com'
 DEFAULT_WEDDING_TEST_EMAIL = DEFAULT_WEDDING_FROM_EMAIL
 
 # This is used in a few places where the names of the couple are used
-BRIDE_AND_GROOM = 'Storm and Elise'
+GROOM_AND_BRIDE = 'Storm and Elise'
 
 # This is used in links in save the date / invitations
 WEDDING_WEBSITE_URL = 'http://stormandelise.com'
@@ -148,7 +148,7 @@ WEDDING_CC_LIST = []  # put email addresses here if you want to cc someone on al
 # change to a real email backend in production
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-WIP_PAGE = True  # Set to False when not working on the WIP Page.
+WIP_PAGE = False  # Set to False when not working on the WIP Page.
 
 try:
     from .localsettings import *

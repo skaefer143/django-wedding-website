@@ -43,7 +43,7 @@ h3,
 h4,
 h5,
 h6 {
-    font-family: 'Open Sans','Helvetica Neue',Arial,sans-serif;
+    font-family: 'Lato';
 }
 
 p {
@@ -93,7 +93,7 @@ aside {
 }
 
 .navbar-default .navbar-header .navbar-brand {
-    text-transform: uppercase;
+    /*text-transform: uppercase;*/
     font-family: 'Open Sans','Helvetica Neue',Arial,sans-serif;
     font-weight: 700;
     color: #f05f40;
@@ -193,7 +193,7 @@ header {
 }
 
 #main-header {
-    background-image: url('../images/wedding-selfie-better.jpg');
+    background-image: url('../images/storm/drumheller-hike.jpg');
 }
 
 header .header-content {
@@ -206,7 +206,15 @@ header .header-content {
 header .header-content .header-content-inner h1 {
     margin-top: 0;
     margin-bottom: 0;
-    text-transform: uppercase;
+    /*text-transform: uppercase;*/
+    font-weight: 700;
+    color: #fff;
+}
+
+header .header-content .header-content-inner h2 {
+    margin-top: 0;
+    margin-bottom: 0;
+    /*text-transform: uppercase;*/
     font-weight: 700;
     color: #fff;
 }
@@ -237,7 +245,7 @@ header .header-content .header-content-inner p {
 
     header .header-content {
         position: absolute;
-        top: 15%;
+        top: 20%;
         padding: 0 50px;
         -webkit-transform: translateY(-50%);
         -ms-transform: translateY(-50%);
@@ -248,6 +256,7 @@ header .header-content .header-content-inner p {
         margin-right: auto;
         margin-left: auto;
         max-width: 1000px;
+        font-size: 68px;
     }
 
     header .header-content .header-content-inner p {
@@ -510,4 +519,33 @@ body {
 #footer {
     background-color: #222;
     padding-bottom: 30px;
+}
+
+.fancy {
+    font-family: 'Grand Hotel';
+    font-size: 1.5em;
+}
+
+.countdown {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    margin: 0 auto;
+    font-size: 1em;
+    font-family: 'Lato';
+    color: #ffffff;
+}
+
+.countdown-container {
+    background-color: transparent;
+}
+
+@media (max-width: 768px) {
+    .countdown-container .countdown-heading {
+        font-size: 5px;
+    }
+
+    .countdown-container .countdown-value {
+        font-size: 5px;
+    }
 }
