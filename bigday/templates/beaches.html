@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block page_js %}
+    <script src="//code.jquery.com/jquery.min.js"></script>
+    <script src="{% static "Minimalist-Countdown-Timer-Plugin-jQuery/js/countdown.js" %}"></script>
+{% endblock %}
+{% block page_head %}
+    <link href='https://fonts.googleapis.com/css?family=Lato:300|Grand+Hotel' rel='stylesheet'>
+    <link rel="stylesheet" type="text/css"
+          href="{% static "Minimalist-Countdown-Timer-Plugin-jQuery/css/countdown.css" %}"/>
+{% endblock %}
+
+{% block page_content %}
+
+    <style>
+        .fancy {
+            font-family: 'Grand Hotel';
+            font-size: 58px;
+        }
+
+        body {
+            text-align: center;
+            padding: 150px 25px 0px 25px;
+            width: 100%;
+            font-size: 20px;
+            font-family: 'Lato';
+            color: #333;
+        }
+
+        h1 {
+            font-size: 50px;
+        }
+
+        h2 {
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        .content {
+            display: contents;
+            text-align: center;
+            width: 650px;
+            margin: 0 auto;
+
+        }
+
+        /* Mobile styles */
+        @media screen and (max-width: 600px) {
+            body{
+                padding: 25px 25px;
+            }
+            .countdown {
+                display: grid;
+                grid-template-columns: 140px 140px;
+                grid-row: auto;
+                grid-column-gap: 0;
+                grid-row-gap: 20px;
+                margin: 0 auto;
+                width: 280px;
+                height: auto;
+            }
+        }
+
+    /* Special shout-out to 2x2 css grid: https://codepen.io/MattWindle/pen/perZRG */
+
+    </style>
+
+    <div class="content">
+        <h1><img src="{% static "bigday/images/storm/beaches.jpg" %}" style="height: 500px; width: auto;"></h1>
+        <br>
+        <h2>December 28th, 2019</h2>
+        <div class='countdown' data-date="2019-12-28" data-time="12:00"></div>
+    </div>
+
+{% endblock %}
+{% block page_footer %}{% endblock %}

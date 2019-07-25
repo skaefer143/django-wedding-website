@@ -28,3 +28,7 @@ def sneak_peek(request):
 
 def wip(request):
     return render(request, 'wip.html', context={'groom_and_bride': settings.GROOM_AND_BRIDE})
+
+
+def beaches(request):
+    return render(request, 'beaches.html')
