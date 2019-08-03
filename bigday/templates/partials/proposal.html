@@ -1,9 +1,13 @@
+{% load staticfiles %}
 <header id="second-header" class="secondary"></header>
 <h5 class="text-center text-muted">A picture from the location where we got engaged!</h5>
 <section id="proposal">
     <div class="container">
         <div class="col-lg-12">
             <h2 class="section-heading text-center">The Proposal</h2>
+            <hr class="primary">
+            <img src="{% static 'bigday/images/storm/proposal-cropped.jpg' %}"
+                 class="img-responsive" alt="" style="width: 50%; min-width: 290px; margin: auto;">
             <hr class="primary">
             <p>
                 In April this year, Storm and I had discussed the prospect of marriage, so I was anticipating it, but he
@@ -34,7 +38,10 @@
                 the wild haha). He took me by the hand and gently led me down a path to the river, basically carrying me
                 down because it was pretty steep.<br><br>
 
-                We sat on the warm, flat rocks by the river and watched the lethargic movement of the water for quite a
+                <img src="{% static 'bigday/images/storm/proposal-selfie-cropped-min.jpg' %}"
+                 class="img-responsive" alt="" style="width: 60%; min-width: 390px; margin: auto;">
+
+                <br>We sat on the warm, flat rocks by the river and watched the lethargic movement of the water for quite a
                 while, but he didn't propose so I thought we should go hike more, then I'd just have to wait for another
                 day to get asked haha. I got up and was about to head back up the hill. I turned to sweep the dust off
                 my bum from the rocks then heard Storm say, "Lise?" I spun around and he was on one knee asking me to
