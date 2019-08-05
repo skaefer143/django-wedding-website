@@ -13,6 +13,13 @@ from guests.models import Party
 
 SAVE_THE_DATE_TEMPLATE = 'guests/email_templates/save_the_date.html'
 SAVE_THE_DATE_CONTEXT_MAP = {
+        'storm_and_elise': {
+            'title': "Storm and Elise",
+            'header_filename': 'hearts.png',
+            'main_image': 'lions-head.jpg', # TODO: Change this photo!
+            'main_color': '#fff3e8',
+            'font_color': '#666666',
+        },
         'lions-head': {
             'title': "Lion's Head",
             'header_filename': 'hearts.png',
@@ -81,34 +88,35 @@ def send_save_the_date_to_party(party, test_only=False):
 
 
 def get_template_id_from_party(party):
-    if party.type == 'formal':
-        # all formal guests get formal invites
-        return random.choice(['lions-head', 'ski-trip'])
-    elif party.type == 'dimagi':
-        # all non-formal dimagis get dimagi invites
-        return 'dimagi'
-    elif party.type == 'fun':
-        all_options = list(SAVE_THE_DATE_CONTEXT_MAP.keys())
-        all_options.remove('dimagi')
-        if party.category == 'ro':
-            # don't send the canada invitation to ro's crowd
-            all_options.remove('canada')
-        # otherwise choose randomly from all options for everyone else
-        return random.choice(all_options)
-    else:
-        return None
+    return 'storm_and_elise'
+    # if party.type == 'formal':
+    #     # all formal guests get formal invites
+    #     return random.choice(['lions-head', 'ski-trip'])
+    # elif party.type == 'dimagi':
+    #     # all non-formal dimagis get dimagi invites
+    #     return 'dimagi'
+    # elif party.type == 'fun':
+    #     all_options = list(SAVE_THE_DATE_CONTEXT_MAP.keys())
+    #     all_options.remove('dimagi')
+    #     if party.category == 'ro':
+    #         # don't send the canada invitation to ro's crowd
+    #         all_options.remove('canada')
+    #     # otherwise choose randomly from all options for everyone else
+    #     return random.choice(all_options)
+    # else:
+    #     return None
 
 
 def get_save_the_date_context(template_id):
     template_id = (template_id or '').lower()
     if template_id not in SAVE_THE_DATE_CONTEXT_MAP:
-        template_id = 'lions-head'
+        template_id = 'storm_and_elise'
     context = copy(SAVE_THE_DATE_CONTEXT_MAP[template_id])
     context['name'] = template_id
-    context['page_title'] = 'Cory and Rowena - Save the Date!'
+    context['page_title'] = 'Storm Kaefer and Elise Tailleur - Save the Date!'
     context['preheader_text'] = (
         "The date that you've eagerly been waiting for is finally here. "
-        "Cory and Ro are getting married! Save the date!"
+        "{} are getting married! Save the date!".format(settings.GROOM_AND_BRIDE)
     )
     return context
 
@@ -117,10 +125,10 @@ def send_save_the_date_email(context, recipients, test_only=False):
     context['email_mode'] = True
     context['rsvp_address'] = settings.DEFAULT_WEDDING_REPLY_EMAIL
     context['site_url'] = settings.WEDDING_WEBSITE_URL
-    context['couple'] = settings.BRIDE_AND_GROOM
+    context['couple'] = settings.GROOM_AND_BRIDE
     template_html = render_to_string(SAVE_THE_DATE_TEMPLATE, context=context)
-    template_text = "Save the date for {}'s wedding! July 2, 2016. Niagata-on-the-Lake, Ontario, Canada".format(
-        settings.BRIDE_AND_GROOM
+    template_text = "Save the date for {}'s wedding! December 28, 2019 in Edmonton, Alberta.".format(
+        settings.GROOM_AND_BRIDE
     )
     subject = 'Save the Date!'
     # https://www.vlent.nl/weblog/2014/01/15/sending-emails-with-embedded-images-in-django/

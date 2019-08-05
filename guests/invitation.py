@@ -28,7 +28,7 @@ def get_invitation_context(party):
         'main_image': 'bride-groom.png',
         'main_color': '#fff3e8',
         'font_color': '#666666',
-        'page_title': "Cory and Rowena - You're Invited!",
+        'page_title': "{} - You're Invited!".format(settings.GROOM_AND_BRIDE),
         'preheader_text': "You are invited!",
         'invitation_id': party.invitation_id,
         'party': party,
@@ -46,10 +46,10 @@ def send_invitation_email(party, test_only=False, recipients=None):
     context = get_invitation_context(party)
     context['email_mode'] = True
     context['site_url'] = settings.WEDDING_WEBSITE_URL
-    context['couple'] = settings.BRIDE_AND_GROOM
+    context['couple'] = settings.GROOM_AND_BRIDE
     template_html = render_to_string(INVITATION_TEMPLATE, context=context)
     template_text = "You're invited to {}'s wedding. To view this invitation, visit {} in any browser.".format(
-        settings.BRIDE_AND_GROOM,
+        settings.GROOM_AND_BRIDE,
         reverse('invitation', args=[context['invitation_id']])
     )
     subject = "You're invited"
