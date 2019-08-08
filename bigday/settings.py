@@ -140,6 +140,7 @@ DEFAULT_WEDDING_TEST_EMAIL = DEFAULT_WEDDING_FROM_EMAIL
 
 # This is used in a few places where the names of the couple are used
 GROOM_AND_BRIDE = 'Storm and Elise'
+GROOM_AND_BRIDE_FULL = 'Storm Kaefer and Elise Tailleur'
 
 # This is used in links in save the date / invitations
 WEDDING_WEBSITE_URL = 'http://stormandelise.com'

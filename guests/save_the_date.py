@@ -16,8 +16,8 @@ SAVE_THE_DATE_CONTEXT_MAP = {
         'storm_and_elise': {
             'title': "Storm and Elise",
             'header_filename': 'hearts.png',
-            'main_image': 'lions-head.jpg', # TODO: Change this photo!
-            'main_color': '#fff3e8',
+            'main_image': 'Elise and Storm-0037-cropped-min.jpg',
+            'main_color': 'aliceblue',
             'font_color': '#666666',
         },
         'lions-head': {
@@ -114,23 +114,23 @@ def get_save_the_date_context(template_id):
     context = copy(SAVE_THE_DATE_CONTEXT_MAP[template_id])
     context['name'] = template_id
     context['page_title'] = 'Storm Kaefer and Elise Tailleur - Save the Date!'
+    context['couple'] = settings.GROOM_AND_BRIDE
+    context['rsvp_address'] = settings.DEFAULT_WEDDING_REPLY_EMAIL
+    context['site_url'] = settings.WEDDING_WEBSITE_URL
     context['preheader_text'] = (
-        "The date that you've eagerly been waiting for is finally here. "
-        "{} are getting married! Save the date!".format(settings.GROOM_AND_BRIDE)
+        "{} are getting married! We would love for you to join us on our special day. "
+        "Save the date!".format(settings.GROOM_AND_BRIDE_FULL)
     )
     return context
 
 
 def send_save_the_date_email(context, recipients, test_only=False):
     context['email_mode'] = True
-    context['rsvp_address'] = settings.DEFAULT_WEDDING_REPLY_EMAIL
-    context['site_url'] = settings.WEDDING_WEBSITE_URL
-    context['couple'] = settings.GROOM_AND_BRIDE
     template_html = render_to_string(SAVE_THE_DATE_TEMPLATE, context=context)
     template_text = "Save the date for {}'s wedding! December 28, 2019 in Edmonton, Alberta.".format(
         settings.GROOM_AND_BRIDE
     )
-    subject = 'Save the Date!'
+    subject = context.get('page_title')
     # https://www.vlent.nl/weblog/2014/01/15/sending-emails-with-embedded-images-in-django/
     msg = EmailMultiAlternatives(subject, template_text, settings.DEFAULT_WEDDING_FROM_EMAIL, recipients,
                                  reply_to=[settings.DEFAULT_WEDDING_REPLY_EMAIL])
