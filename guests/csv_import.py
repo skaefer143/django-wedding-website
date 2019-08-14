@@ -23,22 +23,23 @@ def import_guests(path):
             party = Party.objects.get_or_create(name=party_name)[0]
             party.category = category
             party.is_invited = _is_true(is_invited)
+            party.is_attending = _is_true(is_attending)
             if not party.invitation_id:
                 party.invitation_id = _random_uuid()
+            if not party.save_the_date_id:
+                party.save_the_date_id = _random_uuid()
             party.save()
             if email:
                 guest, created = Guest.objects.get_or_create(party=party, email=email)
                 guest.first_name = first_name
                 guest.last_name = last_name
             else:
-                guest, created = Guest.objects.get_or_create(party=party, first_name=first_name, last_name=last_name)[0]
+                guest, created = Guest.objects.get_or_create(party=party, first_name=first_name, last_name=last_name)
 
             guest.notes = notes
             guest.is_attending = _is_true(is_attending)
-            guest.is_invited = _is_true(is_invited)
-            if not guest.save_the_date_id:
-                guest.save_the_date_id = _random_uuid()
             guest.save()
+        print('All Done!')
 
 
 def export_guests():
