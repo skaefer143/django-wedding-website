@@ -16,7 +16,7 @@ SAVE_THE_DATE_CONTEXT_MAP = {
         'storm_and_elise': {
             'title': "Storm and Elise",
             'header_filename': 'hearts.png',
-            'main_image': 'Elise and Storm-0037-cropped-min.jpg',
+            'main_image': 'Elise-and-Storm-0037-cropped-min.jpg',
             'main_color': 'aliceblue',
             'font_color': '#666666',
         },
@@ -141,9 +141,10 @@ def send_save_the_date_email(context, recipients, test_only=False):
         with open(attachment_path, "rb") as image_file:
             msg_img = MIMEImage(image_file.read())
             msg_img.add_header('Content-ID', '<{}>'.format(filename))
+            msg_img.add_header('Content-Disposition', "attachment; filename= %s" % context['couple'])
             msg.attach(msg_img)
 
-    print('sending {} to {}'.format(context['name'], ', '.join(recipients)))
+    print('\nsending {} to {}\n'.format(context['name'], ', '.join(recipients)))
     if not test_only:
         msg.send()
 

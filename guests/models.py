@@ -22,8 +22,9 @@ class Party(models.Model):
     A party consists of one or more guests.
     """
     name = models.TextField()
-    type = models.CharField(max_length=10, choices=ALLOWED_TYPES)
+    type = models.CharField(max_length=10, choices=ALLOWED_TYPES)  # I'm not using this
     category = models.CharField(max_length=20, null=True, blank=True)
+    save_the_date_id = models.CharField(max_length=32, db_index=True, default=_random_uuid, unique=True)
     save_the_date_sent = models.DateTimeField(null=True, blank=True, default=None)
     save_the_date_opened = models.DateTimeField(null=True, blank=True, default=None)
     invitation_id = models.CharField(max_length=32, db_index=True, default=_random_uuid, unique=True)
@@ -73,6 +74,7 @@ class Guest(models.Model):
     is_attending = models.NullBooleanField(default=None)
     meal = models.CharField(max_length=20, choices=MEALS, null=True, blank=True)
     is_child = models.BooleanField(default=False)
+    notes = models.TextField(null=True, blank=True)
 
     @property
     def name(self):
