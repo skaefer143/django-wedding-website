@@ -1,13 +1,13 @@
 import base64
 from collections import namedtuple
 import random
-from datetime import datetime
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 from django.db.models import Count, Q
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render
+from django.utils import timezone
 from django.views.generic import ListView
 from guests import csv_import
 from guests.invitation import get_invitation_context, INVITATION_TEMPLATE, guess_party_by_invite_id_or_404, \
@@ -66,7 +66,7 @@ def invitation(request, invite_id):
     party = guess_party_by_invite_id_or_404(invite_id)
     if party.invitation_opened is None:
         # update if this is the first time the invitation was opened
-        party.invitation_opened = datetime.utcnow()
+        party.invitation_opened = timezone.now()
         party.save()
     if request.method == 'POST':
         for response in _parse_invite_params(request.POST):
@@ -139,6 +139,25 @@ def save_the_date_preview(request, template_id):
     context = get_save_the_date_context(template_id)
     context['email_mode'] = False
     return render(request, SAVE_THE_DATE_TEMPLATE, context=context)
+
+
+def save_the_date_redirect(request, save_the_date_id):
+    """Save if save the date has been opened (from the email) or not."""
+    try:
+        party = Party.objects.get(save_the_date_id=save_the_date_id)
+    except Party.DoesNotExist:
+        if settings.DEBUG:
+            # in debug mode allow access by ID
+            party = Party.objects.get(id=int(save_the_date_id))
+        else:
+            # Oh well we tried lol, bring em back home
+            return HttpResponseRedirect(reverse('home'))
+
+    if not party.save_the_date_opened:
+        # Only save the first time
+        party.save_the_date_opened = timezone.now()
+        party.save()
+    return HttpResponseRedirect(reverse('home'))
 
 
 @login_required

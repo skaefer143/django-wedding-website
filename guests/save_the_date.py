@@ -8,6 +8,8 @@ import random
 from django.conf import settings
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
+from django.utils import timezone
+
 from guests.models import Party
 
 
@@ -70,7 +72,7 @@ def send_all_save_the_dates(test_only=False, mark_as_sent=False):
     for party in to_send_to:
         send_save_the_date_to_party(party, test_only=test_only)
         if mark_as_sent:
-            party.save_the_date_sent = datetime.now()
+            party.save_the_date_sent = timezone.now()
             party.save()
 
 
@@ -80,6 +82,7 @@ def send_save_the_date_to_party(party, test_only=False):
     if not recipients:
         print('===== WARNING: no valid email addresses found for {} ====='.format(party))
     else:
+        context['save_the_date_id'] = party.save_the_date_id
         send_save_the_date_email(
             context,
             recipients,
@@ -153,5 +156,6 @@ def clear_all_save_the_dates():
     print('clear')
     for party in Party.objects.exclude(save_the_date_sent=None):
         party.save_the_date_sent = None
+        party.save_the_date_opened = None
         print("resetting {}".format(party))
         party.save()

@@ -1,7 +1,7 @@
 {% extends 'guests/email_templates/email_base.html' %}
 {% load staticfiles %}
 {% block main_image %}
-    <a href="{{ site_url }}"
+    <a href="{{ site_url }}{% if save_the_date_id %}/save-the-date-redirect/{{ save_the_date_id }}/{% endif %}"
        {% if email_mode %}target="_blank"{% endif %}>
     {% with "save-the-date/images/"|add:main_image as main_static_url %}
         <img src="{% if email_mode %}cid:{{ main_image }}{% else %}{% static main_static_url %}{% endif %}"
@@ -16,7 +16,7 @@
     <table border="0" width="100%" cellpadding="0" cellspacing="0">
         <tbody>
         <tr>
-            <td style="font-size: 35px; font-family: Palatino, serif; color: {{ font_color }}; padding-top: 30px; font-weight:bolder;"
+            <td style="font-size: 35px; font-family: Lato, serif; color: {{ font_color }}; padding-top: 30px; font-weight:bolder;"
                 class="padding-copy"
                 align="center">
                 December 28, 2019
@@ -27,6 +27,16 @@
                 class="padding-copy"
                 align="center">
                 {{ preheader_text }}
+            </td>
+        </tr>
+        <tr>
+            <td style="padding: 20px 0 0 0; font-size: 16px; line-height: 20px; font-family: Helvetica, Arial, sans-serif; color: {{ font_color }};"
+                class="padding-copy"
+                align="center">
+                Check out our website at
+                <a href="{{ site_url }}{% if save_the_date_id %}/save-the-date-redirect/{{ save_the_date_id }}/{% endif %}">
+                    stormandelise.com</a>.
+                You'll find Engagement Photos, Gift Registry options, and more information about our big day!
                 <br><br>
                 -Storm and Elise
             </td>
@@ -37,6 +47,6 @@
 {% block footer_content %}
     Can't make it? Let us know at <a class="moz-txt-link-abbreviated" href="mailto:{{ rsvp_address }}">{{ rsvp_address }}</a>.
     {% if email_mode %}
-        <p><a href="{{ site_url }}">{{ site_url }}</a></p>
+        <p><a href="{{ site_url }}{% if save_the_date_id %}/save-the-date-redirect/{{ save_the_date_id }}/{% endif %}">stormandelise.com</a></p>
     {% endif %}
 {% endblock %}

@@ -16,6 +16,10 @@
                 <td>{{ unopened_invite_count }}<span class="text-muted"> / {{ total_invites }}</span></td>
             </tr>
             <tr>
+                <td>Unopened Save The Dates</td>
+                <td>{{ unopened_save_the_date_count }}<span class="text-muted"> / {{ total_save_the_date }}</span></td>
+            </tr>
+            <tr>
                 <td>Not Coming</td>
                 <td>{{ not_coming_guests }}</td>
             </tr>
@@ -71,6 +75,14 @@
             <div class="col-lg-6">
                 <h1>Open Unresponded Invitations</h1>
                 {% with parties_with_open_unresponded_invites as party_list %}
+                    {% include "guests/partials/party_list.html" %}
+                {% endwith %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <h1>Save The Dates</h1>
+                {% with party_list=parties_save_the_dates %}
                     {% include "guests/partials/party_list.html" %}
                 {% endwith %}
             </div>
