@@ -22,7 +22,7 @@ class Party(models.Model):
     A party consists of one or more guests.
     """
     name = models.TextField()
-    type = models.CharField(max_length=10, choices=ALLOWED_TYPES)  # I'm not using this
+    type = models.CharField(max_length=10, choices=ALLOWED_TYPES, null=True, blank=True)  # I'm not using this
     category = models.CharField(max_length=50, null=True, blank=True)
     save_the_date_id = models.CharField(max_length=32, db_index=True, default=_random_uuid, unique=True)
     save_the_date_sent = models.DateTimeField(null=True, blank=True, default=None)
