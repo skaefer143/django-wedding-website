@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block page_content %}
     <div class="container" id="main">
-        <h1>Dashboard</h1>
+        <h1 style="text-align: center; font-size: 49px;">Dashboard</h1>
         <table class="table table-striped">
             <tr>
                 <td>Guests Attending / Possible</td>
@@ -16,19 +16,25 @@
                 <td>{{ unopened_invite_count }}<span class="text-muted"> / {{ total_invites }}</span></td>
             </tr>
             <tr>
-                <td>Unopened Save The Dates</td>
-                <td>{{ unopened_save_the_date_count }}<span class="text-muted"> / {{ total_save_the_date }}</span></td>
+                <td>Opened Save The Dates</td>
+                <td>{{ opened_save_the_date_count }}<span class="text-muted"> / {{ total_save_the_dates }}</span>
+                    ( {% widthratio opened_save_the_date_count total_save_the_dates 1 %} %)</td>
+{#                Lol let's divide stuff #}
             </tr>
             <tr>
                 <td>Not Coming</td>
                 <td>{{ not_coming_guests }}</td>
             </tr>
-            </tbody>
         </table>
         <div class="row">
-            <div class="col-lg-6">
+            <div class="col-lg-12">
                 <h1>Guests by category</h1>
                 <table class="table">
+                {% if category_breakdown.count == 0 %}
+                    <tr>
+                        <td>No Guests Attending Yet</td>
+                    </tr>
+                {% else %}
                     <thead>
                         <tr>
                             {% for category in category_breakdown %}
@@ -43,56 +49,69 @@
                             {% endfor %}
                         </tr>
                     </tbody>
+                {% endif %}
                 </table>
             </div>
-            <div class="col-lg-6">
-                <h1>Meal choices</h1>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            {% for meal in meal_breakdown %}
-                            <th>{{ meal.meal }}</th>
-                            {% endfor %}
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            {% for meal in meal_breakdown %}
-                            <td>{{ meal.count }}</td>
-                            {% endfor %}
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+{#            <div class="col-lg-6">#}
+{#                <h1>Meal choices</h1>#}
+{#                <table class="table">#}
+{#                    <thead>#}
+{#                        <tr>#}
+{#                            {% for meal in meal_breakdown %}#}
+{#                            <th>{{ meal.meal }}</th>#}
+{#                            {% endfor %}#}
+{#                        </tr>#}
+{#                    </thead>#}
+{#                    <tbody>#}
+{#                        <tr>#}
+{#                            {% for meal in meal_breakdown %}#}
+{#                            <td>{{ meal.count }}</td>#}
+{#                            {% endfor %}#}
+{#                        </tr>#}
+{#                    </tbody>#}
+{#                </table>#}
+{#            </div>#}
         </div>
         <div class="row">
             <div class="col-lg-6">
                 <h1>Unopened Invitations</h1>
-                {% with party_list=parties_with_unopen_invites %}
-                    {% include "guests/partials/party_list.html" %}
-                {% endwith %}
+                {% if parties_with_unopen_invites.count == 0 %}
+                    <table class="table">
+                        <tr><td>No Unresponded Invitations</td></tr>
+                    </table>
+                {% else %}
+                    {% with party_list=parties_with_unopen_invites %}
+                        {% include "guests/partials/party_list.html" %}
+                    {% endwith %}
+                {% endif %}
             </div>
             <div class="col-lg-6">
                 <h1>Open Unresponded Invitations</h1>
-                {% with parties_with_open_unresponded_invites as party_list %}
-                    {% include "guests/partials/party_list.html" %}
-                {% endwith %}
+                {% if parties_with_open_unresponded_invites.count == 0 %}
+                    <table class="table">
+                        <tr><td>No Open and Unresponded Invitations</td></tr>
+                    </table>
+                {% else %}
+                    {% with parties_with_open_unresponded_invites as party_list %}
+                        {% include "guests/partials/party_list.html" %}
+                    {% endwith %}
+                {% endif %}
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-6">
-                <h1>Save The Dates</h1>
-                {% with party_list=parties_save_the_dates %}
-                    {% include "guests/partials/party_list.html" %}
+            <div class="col-lg-12">
+                <h1>Unopened Save The Dates (confirm their email works)</h1>
+                {% with party_list=unopened_save_the_date %}
+                    {% include "guests/partials/party_save_the_date_list.html" %}
                 {% endwith %}
             </div>
         </div>
-        <div class="col-lg-6">
-                <h1>Attending Guests Without Meals</h1>
-                {% with guest_list=guests_without_meals %}
-                    {% include "guests/partials/guest_list.html" %}
-                {% endwith %}
-            </div>
-        </div>
+{#        <div class="col-lg-6">#}
+{#                <h1>Attending Guests Without Meals</h1>#}
+{#                {% with guest_list=guests_without_meals %}#}
+{#                    {% include "guests/partials/guest_list.html" %}#}
+{#                {% endwith %}#}
+{#            </div>#}
+{#        </div>#}
     </div>
 {% endblock %}

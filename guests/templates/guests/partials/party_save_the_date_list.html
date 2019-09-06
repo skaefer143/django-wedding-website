@@ -1,0 +1,21 @@
+{% load tz %}
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Party</th>
+            <th>Category</th>
+            <th>Sent to</th>
+            <th>Sent</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for party in party_list %}
+        <tr>
+            <td><a href="{% url 'admin:guests_party_change' party.pk %}" >{{ party.name }}</a></td>
+            <td>{{ party.category }}</td>
+            <td>{{ party.guest_emails|join:"<br>" }}</td>
+            <td>{{ party.save_the_date_sent|localtime }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
