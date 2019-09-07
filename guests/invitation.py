@@ -34,6 +34,8 @@ def get_invitation_context(party):
         'invitation_id': party.invitation_id,
         'party': party,
         'meals': MEALS,
+        'site_url': settings.WEDDING_WEBSITE_URL,
+        'couple': settings.GROOM_AND_BRIDE
     }
 
 
@@ -46,8 +48,6 @@ def send_invitation_email(party, test_only=False, recipients=None):
 
     context = get_invitation_context(party)
     context['email_mode'] = True
-    context['site_url'] = settings.WEDDING_WEBSITE_URL
-    context['couple'] = settings.GROOM_AND_BRIDE
     template_html = render_to_string(INVITATION_TEMPLATE, context=context)
     template_text = "You're invited to {}'s wedding. To view this invitation, visit {} in any browser.".format(
         settings.GROOM_AND_BRIDE,
