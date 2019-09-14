@@ -32,9 +32,15 @@
     <table border="0" width="100%" cellpadding="0" cellspacing="0" align="center">
         <tbody>
         <tr>
+            <td class="padding-copy" align="center" style="padding: 20px 0 0 0; font-size: 16px; line-height: 20px; font-family: Helvetica, Arial, sans-serif; color: {{ font_color }};">
+                Dear {% for guest in party.ordered_guests.all %}{% if party.ordered_guests.all.count >= 2 and forloop.last %} and {% endif %} {{ guest.first_name }}{% endfor %},<br><br>
+                Storm Kaefer and Elise Tailler are getting married, and would love for you to join us!
+            </td>
+        </tr>
+        <tr>
             <td style="padding: 20px 0 0 0; font-size: 16px; line-height: 20px; font-family: Helvetica, Arial, sans-serif; color: {{ font_color }};"
                 class="padding-copy" align="center">
-                {{ couple }}'s Wedding<br>
+                Please click on the "View Invitation" button above to RSVP!<br>
             </td>
         </tr>
         </tbody>
