@@ -9,7 +9,17 @@
                 <tr>
                     <td>
                         <a href="{% if email_mode %}{{ site_url }}{% endif %}{% url 'invitation' invitation_id %}" target="_blank"
-                           style="font-size: 20px; font-family: Helvetica, Arial, sans-serif; color: #ffffff; text-decoration: none; border-radius: 3px; -webkit-border-radius: 3px; -moz-border-radius: 3px; background-color: #337ab7; border-top: 12px solid #337ab7; border-bottom: 12px solid #337ab7; border-right: 18px solid #337ab7; border-left: 18px solid #337ab7; display: inline-block;">
+                           style="font-size: 20px;
+                           font-family: Helvetica, Arial, sans-serif;
+                           color: #ffffff; text-decoration: none;
+                           border-radius: 3px;
+                           -webkit-border-radius: 3px;
+                           -moz-border-radius: 3px;
+                           background-color: #5a0f22;
+                           border-top: 12px solid #5a0f22;
+                           border-bottom: 12px solid #5a0f22;
+                           border-right: 18px solid #5a0f22;
+                           border-left: 18px solid #5a0f22; display: inline-block;">
                             View Invitation
                         </a>
                     </td>
@@ -21,11 +31,12 @@
 {% endblock %}
 {% block main_image %}
     {% with "invitation/images/"|add:main_image as main_static_url %}
-    <img src="{% if email_mode %}cid:{{ main_image }}{% else %}{% static main_static_url %}{% endif %}"
+        <a href="{% if email_mode %}{{ site_url }}{% endif %}{% url 'invitation' invitation_id %}" target="_blank">
+        <img src="{% if email_mode %}cid:{{ main_image }}{% else %}{% static main_static_url %}{% endif %}"
          alt="{{ couple }}"
-         style="display: block; padding: 0; color: #666666;"
+         style="display: block; padding: 0; color: #666666; margin-top: 20px;"
          class="img-max" border="0"
-         height="512" width="512">
+         height="512" width="512"></a>
     {% endwith %}
 {% endblock %}
 {% block main_copy %}
@@ -34,13 +45,13 @@
         <tr>
             <td class="padding-copy" align="center" style="padding: 20px 0 0 0; font-size: 16px; line-height: 20px; font-family: Helvetica, Arial, sans-serif; color: {{ font_color }};">
                 Dear {% for guest in party.ordered_guests.all %}{% if party.ordered_guests.all.count >= 2 and forloop.last %} and {% endif %} {{ guest.first_name }}{% endfor %},<br><br>
-                Storm Kaefer and Elise Tailler are getting married, and would love for you to join us!
+                Storm Kaefer and Elise Tailler are getting married, and they would love for you to join them!
             </td>
         </tr>
         <tr>
             <td style="padding: 20px 0 0 0; font-size: 16px; line-height: 20px; font-family: Helvetica, Arial, sans-serif; color: {{ font_color }};"
                 class="padding-copy" align="center">
-                Please click on the "View Invitation" button above to RSVP!<br>
+                Please click on the "View Invitation" button above for more information and to RSVP!<br>
             </td>
         </tr>
         </tbody>

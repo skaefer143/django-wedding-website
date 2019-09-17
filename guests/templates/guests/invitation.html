@@ -5,25 +5,28 @@
 {% endblock %}
 {% block page_content %}
     <div class="container" id="invitation-body">
-        <section class="video-container">
-            <div class="responsive-video">
-                <iframe src="https://www.youtube.com/embed/J_AIs7_Yu5A" frameborder="0" allowfullscreen></iframe>
-            </div>
+        <section style="background-color: #ffffff; margin-top: 2em;">
+            <img src="{% static "/bigday/images/storm/Elise and Storm-0022-cropped.jpg"%}" alt="Storm and Elise are getting married!"
+                 style="width:100%; height:100%; border-radius: 1em;">
         </section>
         <section class="col-md-6 text-center">
             <div id="invitation-details">
             <h2>Storm and Elise's Wedding</h2>
             <p class="lead" style="white-space: pre-line">
-                Ceremony:
+                <b>Ceremony:</b>
+                Grace Point Church of God
+                <a href="https://goo.gl/maps/PBLyDVbE7ZqBZVpS6">720 62 St SW, Edmonton, AB T6X 0G3</a>
+                Saturday, December 28, at 1:30pm
 
-                Reception:
-                July 2, 2016, at 4:30 pm<br>
-                Ravine Vineyard<br>
-                Niagara-on-the-Lake, ON, Canada
+                <b>Reception:</b>
+                Coloniale Golf Club
+                <a href="https://goo.gl/maps/i3MnbD5rco5XF7ew9">10 Country Club Dr, Beaumont, AB T4X 1M1</a>
+                Saturday, December 28, at 5:30 pm
             </p>
             </div>
         </section>
         <section class="col-md-6">
+        {% if not party.responded_to_invitation %}
         <form data-toggle="validator" id="invitation-details" class="form-horizontal" method="post">
             <h2 id="rsvp-header" class="text-center">RSVP</h2>
             <div class="clearfix"></div>
@@ -40,18 +43,18 @@
                 </label>
                 {% endwith %}
             </div>
-            {% if not guest.is_child %}
-            <div class="form-group">
-                {% with 'meal-'|add:guest.unique_id as meal_label %}
-                <label for="{{ meal_label }}" class="col-sm-3 control-label">... and will eat</label>
-                {% for meal_id, meal_name in meals %}
-                <label class="radio-inline">
-                    <input type="radio" name="{{ meal_label }}" id="{{ meal_label }}-yes" value="{{ meal_id }}" {% if guest.meal == meal_id %}checked="checked"{% endif %} {% if guest.is_attending == False %}disabled{% endif %} required> {{ meal_name }}
-                </label>
-                {% endfor %}
-                {% endwith %}
-            </div>
-            {% endif %}
+{#            {% if not guest.is_child %}#}
+{#            <div class="form-group">#}
+{#                {% with 'meal-'|add:guest.unique_id as meal_label %}#}
+{#                <label for="{{ meal_label }}" class="col-sm-3 control-label">... and will eat</label>#}
+{#                {% for meal_id, meal_name in meals %}#}
+{#                <label class="radio-inline">#}
+{#                    <input type="radio" name="{{ meal_label }}" id="{{ meal_label }}-yes" value="{{ meal_id }}" {% if guest.meal == meal_id %}checked="checked"{% endif %} {% if guest.is_attending == False %}disabled{% endif %} required> {{ meal_name }}#}
+{#                </label>#}
+{#                {% endfor %}#}
+{#                {% endwith %}#}
+{#            </div>#}
+{#            {% endif %}#}
             {% endfor %}
             <div class="form-group col-sm-12">
                 <input type="text" name="comments" class="form-control" placeholder="Questions/comments/well wishes" >
@@ -62,41 +65,59 @@
                 </div>
             </div>
         </form>
+        {% else %}
+        <div id="invitation-details">
+            <h2 id="rsvp-header" class="text-center">RSVP</h2>
+            <p>
+                It looks like you've responded back already!
+                You responded with:
+            </p>
+            <ul>
+                {% for guest in party.ordered_guests %}
+                <li>{{ guest.name }} - {% if guest.is_attending %}Attending{% else %}Not Attending{% endif %}</li>
+                {% endfor %}
+            </ul>
+        <p>
+            If this looks incorrect, please contact us at <a href="mailto:stormandelise@gmail.com">stormandelise@gmail.com</a>
+            right away!
+        </p>
+        </div>
+        {% endif %}
         </section>
     </div>
 {% endblock %}
-{% block page_js %}
-    <script src="{% static 'validator.js' %}"></script>
-    <script>
-    $(function () {
-        // enable/disable meal choices based on attendance
-        $("input.attending-radio").change(function (e) {
-            var target = $(e.target);
-            if (target.closest('.form-group').data('is-child') === "True") {
-                // don't attempt to update meals for children, who don't have them.
-                return;
-            }
-            var value = target.attr('value');
-            var mealButtonContainer = target.closest('.form-group').next('.form-group');
-            var mealButtons = mealButtonContainer.find('[type=radio]');
-            if (value === 'yes') {
-                mealButtonContainer.removeClass('text-muted');
-                mealButtons.each(function (index, button) {
-                    button.disabled = false;
-                    button.required = true;
-                });
-            } else if (value === "no") {
-                mealButtonContainer.addClass('text-muted');
-                mealButtons.each(function (index, button) {
-                    button.checked = false;
-                    button.disabled = true;
-                    button.required = false;
-                });
-            }
-            // reload validation
-            $(document.forms[0]).validator('destroy');
-            $(document.forms[0]).validator();
-        });
-    });
-    </script>
-{% endblock %}
+{#{% block page_js %}#}
+{#    <script src="{% static 'validator.js' %}"></script>#}
+{#    <script>#}
+{#    $(function () {#}
+{#        // enable/disable meal choices based on attendance#}
+{#        $("input.attending-radio").change(function (e) {#}
+{#            var target = $(e.target);#}
+{#            if (target.closest('.form-group').data('is-child') === "True") {#}
+{#                // don't attempt to update meals for children, who don't have them.#}
+{#                return;#}
+{#            }#}
+{#            var value = target.attr('value');#}
+{#            var mealButtonContainer = target.closest('.form-group').next('.form-group');#}
+{#            var mealButtons = mealButtonContainer.find('[type=radio]');#}
+{#            if (value === 'yes') {#}
+{#                mealButtonContainer.removeClass('text-muted');#}
+{#                mealButtons.each(function (index, button) {#}
+{#                    button.disabled = false;#}
+{#                    button.required = true;#}
+{#                });#}
+{#            } else if (value === "no") {#}
+{#                mealButtonContainer.addClass('text-muted');#}
+{#                mealButtons.each(function (index, button) {#}
+{#                    button.checked = false;#}
+{#                    button.disabled = true;#}
+{#                    button.required = false;#}
+{#                });#}
+{#            }#}
+{#            // reload validation#}
+{#            $(document.forms[0]).validator('destroy');#}
+{#            $(document.forms[0]).validator();#}
+{#        });#}
+{#    });#}
+{#    </script>#}
+{#{% endblock %}#}

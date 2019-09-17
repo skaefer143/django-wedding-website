@@ -32,7 +32,7 @@ def export_guests(request):
 @login_required
 def dashboard(request):
     parties_with_pending_invites = Party.objects.filter(
-        is_invited=True, is_attending=None
+        is_invited=True, is_attending=None, invitation_sent__isnull=False
     ).order_by('category', 'name')
     parties_with_unopen_invites = parties_with_pending_invites.filter(invitation_opened=None)
     parties_with_open_unresponded_invites = parties_with_pending_invites.exclude(invitation_opened=None)
@@ -84,6 +84,7 @@ def invitation(request, invite_id):
             comments = request.POST.get('comments')
             party.comments = comments if not party.comments else '{}; {}'.format(party.comments, comments)
         party.is_attending = party.any_guests_attending
+        party.responded_to_invitation = timezone.now()
         party.save()
         return HttpResponseRedirect(reverse('rsvp-confirm', args=[invite_id]))
     return render(request, template_name='guests/invitation.html', context={

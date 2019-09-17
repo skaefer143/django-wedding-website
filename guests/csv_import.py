@@ -20,10 +20,10 @@ def import_guests(path):
             if not party_name:
                 print ('skipping row {}'.format(row))
                 continue
-            party, party_created = Party.objects.get_or_create(name=party_name)[0]
+            party, party_created = Party.objects.get_or_create(name=party_name)
             party.category = category
             party.is_invited = _is_true(is_invited)
-            party.is_attending = _is_true(is_attending)
+            party.is_attending = _is_null_or_true(is_attending)
             if not party.invitation_id:
                 party.invitation_id = _random_uuid()
             if not party.save_the_date_id:
@@ -41,7 +41,7 @@ def import_guests(path):
             if guest_created:
                 print('Adding Guest {} {}'.format(guest.first_name, guest.last_name))
             guest.notes = notes
-            guest.is_attending = _is_true(is_attending)
+            guest.is_attending = _is_null_or_true(is_attending)
             guest.save()
         print('All Done!')
 
@@ -76,4 +76,11 @@ def export_guests():
 
 def _is_true(value):
     value = value or ''
+    return value.lower() in ('y', 'yes')
+
+
+def _is_null_or_true(value):
+    value = value or ''
+    if value == '':
+        return None
     return value.lower() in ('y', 'yes')

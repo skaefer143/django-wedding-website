@@ -26,9 +26,9 @@ def guess_party_by_invite_id_or_404(invite_id):
 def get_invitation_context(party):
     return {
         'title': "Lion's Head",
-        'main_image': 'bride-groom.png',
-        'main_color': '#fff3e8',
-        'font_color': '#666666',
+        'main_image': 'Elise and Storm-0057-min.jpg',
+        'main_color': '#edfffd',
+        'font_color': '#454040',
         'page_title': "{} - You're Invited!".format(settings.GROOM_AND_BRIDE),
         'preheader_text': "You are invited!",
         'invitation_id': party.invitation_id,
@@ -67,7 +67,7 @@ def send_invitation_email(party, test_only=False, recipients=None):
             msg_img.add_header('Content-ID', '<{}>'.format(filename))
             msg.attach(msg_img)
 
-    print ('sending invitation to {} ({})'.format(party.name, ', '.join(recipients)))
+    print('sending invitation to {} ({})'.format(party.name, ', '.join(recipients)))
     if not test_only:
         msg.send()
 
@@ -79,3 +79,4 @@ def send_all_invitations(test_only, mark_as_sent):
         if mark_as_sent:
             party.invitation_sent = timezone.now()
             party.save()
+        print("All Done!")
