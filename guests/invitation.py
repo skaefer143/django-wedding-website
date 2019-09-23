@@ -25,12 +25,12 @@ def guess_party_by_invite_id_or_404(invite_id):
 
 def get_invitation_context(party):
     return {
-        'title': "Lion's Head",
-        'main_image': 'Elise and Storm-0057-min.jpg',
-        'main_color': '#edfffd',
+        'title': "Storm and Elise",
+        'main_image': 'Elise-and-Storm-0086.jpg',
+        'main_color': '#ecf7fe',
         'font_color': '#454040',
         'page_title': "{} - You're Invited!".format(settings.GROOM_AND_BRIDE),
-        'preheader_text': "You are invited!",
+        # 'preheader_text': "You are invited!", # I don't want this, looks weird in phone notifications
         'invitation_id': party.invitation_id,
         'party': party,
         'meals': MEALS,
@@ -53,7 +53,7 @@ def send_invitation_email(party, test_only=False, recipients=None):
         settings.GROOM_AND_BRIDE,
         reverse('invitation', args=[context['invitation_id']])
     )
-    subject = "You're invited"
+    subject = "You're Invited!"
     # https://www.vlent.nl/weblog/2014/01/15/sending-emails-with-embedded-images-in-django/
     msg = EmailMultiAlternatives(subject, template_text, settings.DEFAULT_WEDDING_FROM_EMAIL, recipients,
                                  cc=settings.WEDDING_CC_LIST,
@@ -65,6 +65,7 @@ def send_invitation_email(party, test_only=False, recipients=None):
         with open(attachment_path, "rb") as image_file:
             msg_img = MIMEImage(image_file.read())
             msg_img.add_header('Content-ID', '<{}>'.format(filename))
+            msg_img.add_header('Content-Disposition', "attachment; filename= %s" % context['couple'])
             msg.attach(msg_img)
 
     print('sending invitation to {} ({})'.format(party.name, ', '.join(recipients)))

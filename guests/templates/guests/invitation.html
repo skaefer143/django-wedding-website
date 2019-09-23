@@ -1,45 +1,37 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
 {% block page_head %}
+    <link href='https://fonts.googleapis.com/css?family=Lato:300|Grand+Hotel' rel='stylesheet'>
     <link href="{% static 'bigday/css/invitation.css' %}" rel="stylesheet" xmlns="http://www.w3.org/1999/html">
 {% endblock %}
 {% block page_content %}
     <div class="container" id="invitation-body">
+        <section class="col-lg-12 header-content">
+            <div class="header-content-inner">
+                <h1>Storm Kaefer and Elise Tailleur are getting <span class="fancy" style="color: #9e0e24;">married!</span></h1>
+                <h2>Saturday, December 28th, 2019</h2>
+            </div>
+        </section>
         <section style="background-color: #ffffff; margin-top: 2em;">
             <img src="{% static "/bigday/images/storm/Elise and Storm-0022-cropped.jpg"%}" alt="Storm and Elise are getting married!"
                  style="width:100%; height:100%; border-radius: 1em;">
         </section>
-        <section class="col-md-6 text-center">
-            <div id="invitation-details">
-            <h2>Storm and Elise's Wedding</h2>
-            <p class="lead" style="white-space: pre-line">
-                <b>Ceremony:</b>
-                Grace Point Church of God
-                <a href="https://goo.gl/maps/PBLyDVbE7ZqBZVpS6">720 62 St SW, Edmonton, AB T6X 0G3</a>
-                Saturday, December 28, at 1:30pm
-
-                <b>Reception:</b>
-                Coloniale Golf Club
-                <a href="https://goo.gl/maps/i3MnbD5rco5XF7ew9">10 Country Club Dr, Beaumont, AB T4X 1M1</a>
-                Saturday, December 28, at 5:30 pm
-            </p>
-            </div>
-        </section>
-        <section class="col-md-6">
+        <section class="col-md-12">
         {% if not party.responded_to_invitation %}
         <form data-toggle="validator" id="invitation-details" class="form-horizontal" method="post">
             <h2 id="rsvp-header" class="text-center">RSVP</h2>
-            <div class="clearfix"></div>
+            <div class="clearfix" style="text-align: center;">Please submit this form by October 26th, 2019</div>
+            <p></p>
             {% csrf_token %}
             {% for guest in party.ordered_guests.all %}
             <div class="form-group" data-is-child="{{ guest.is_child }}">
                 {% with 'attending-'|add:guest.unique_id as attending_label %}
                 <label for="{{ attending_label }}" class="col-sm-3 control-label">{{ guest.name }}</label>
                 <label class="radio-inline">
-                    <input class="attending-radio" type="radio" name="{{ attending_label }}" value="yes" {% if guest.is_attending %}checked="checked"{% endif %} required> will attend
+                    <input class="attending-radio" style="position: relative;" type="radio" name="{{ attending_label }}" value="yes" {% if guest.is_attending %}checked="checked"{% endif %} required> will attend
                 </label>
                 <label class="radio-inline">
-                    <input class="attending-radio" type="radio" name="{{ attending_label }}" value="no" {% if guest.is_attending == False %}checked="checked"{% endif %} required> will not attend
+                    <input class="attending-radio" style="position: relative;" type="radio" name="{{ attending_label }}" value="no" {% if guest.is_attending == False %}checked="checked"{% endif %} required> will not attend
                 </label>
                 {% endwith %}
             </div>
@@ -57,7 +49,7 @@
 {#            {% endif %}#}
             {% endfor %}
             <div class="form-group col-sm-12">
-                <input type="text" name="comments" class="form-control" placeholder="Questions/comments/well wishes" >
+                <input type="text" name="comments" class="form-control" placeholder="Questions (or your grooviest song request)" >
             </div>
             <div class="form-group">
                 <div class="text-center">
@@ -84,6 +76,24 @@
         </div>
         {% endif %}
         </section>
+{#        <section class="col-lg-12 text-center">#}
+        <section class="col-lg-12"><div id="invitation-details">
+{#            <h2>Storm and Elise's Wedding</h2>#}
+            {% include 'partials/ceremony.html' %}
+{#            <p class="lead" style="white-space: pre-line">#}
+{#                <b>Ceremony:</b>#}
+{#                Grace Point Church of God#}
+{#                <a href="https://goo.gl/maps/PBLyDVbE7ZqBZVpS6">720 62 St SW, Edmonton, AB T6X 0G3</a>#}
+{#                Saturday, December 28, at 1:30pm#}
+{##}
+{#                <b>Reception:</b>#}
+{#                Coloniale Golf Club#}
+{#                <a href="https://goo.gl/maps/i3MnbD5rco5XF7ew9">10 Country Club Dr, Beaumont, AB T4X 1M1</a>#}
+{#                Saturday, December 28, at 5:30 pm#}
+{#            </p>#}
+        </div></section>
+{#        </section>#}
+
     </div>
 {% endblock %}
 {#{% block page_js %}#}

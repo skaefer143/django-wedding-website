@@ -1,3 +1,8 @@
+* {
+    font-family: Lato, sans-serif;
+    font-weight: 500;
+}
+
 .responsive-video {
     position: relative;
     padding-bottom: 56.25%;
@@ -55,4 +60,43 @@ body {
 
 #footer {
     padding-bottom: 30px;
+}
+
+.fancy {
+    font-family: 'Grand Hotel';
+    font-size: 1.5em;
+}
+
+.header-content-inner h1 {
+    font-weight: 700;
+    color: #2e2e2e;
+    font-size: 60px;
+    text-align: center;
+    font-family: 'Lato';
+}
+
+.header-content-inner h2 {
+    text-align: center;
+    margin: 20px 0px;
+}
+
+@media (max-width: 700px) {
+    .header-content-inner h1 {
+        font-weight: 700;
+        color: #2e2e2e;
+        font-size: 30px;
+        text-align: center;
+    }
+
+    .header-content-inner h2 {
+        text-align: center;
+        margin: 20px 0px;
+        font-size: 20px;
+    }
+}
+
+@media (min-width: 768px) {
+    .form-group {
+        font-size: 22px;
+    }
 }
