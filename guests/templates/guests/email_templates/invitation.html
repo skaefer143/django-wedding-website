@@ -9,7 +9,7 @@
                 <tr>
                     <td class="padding-copy" align="center" style="
                             padding: 20px 0 0 0; font-size: 40px; line-height: 50px; font-weight: 500;
-                            font-family: 'Sacramento', cursive; color: {{ font_color }};">
+                            font-family: Lato, serif; color: {{ font_color }};">
                         Dear {% for guest in party.ordered_guests.all %}{% if party.ordered_guests.all.count >= 2 and forloop.last %} and {% endif %} {{ guest.first_name }}{% endfor %},<br><br>
                     </td>
                 </tr>
@@ -35,7 +35,7 @@
             <td class="padding-copy" align="center" style="
                     padding: 20px 0 0 0; font-size: 35px; line-height: 60px;
                     font-weight: 500;
-                    font-family: 'Sacramento', cursive; color: {{ font_color }};">
+                    font-family: Lato, serif; color: {{ font_color }};">
                 Dr. and Mrs. Greg and Mena Tailleur and Mr. and Mrs. Martin and Connie Kaefer invite you to come
                 celebrate the love of Elise Joy Tailleur and Nathan Storm Kaefer as they exchange their vows &
                 begin a new life together on Saturday, the 28th of December.
@@ -46,7 +46,7 @@
             <td style="
                     padding: 20px 0 0 0; font-size: 35px; line-height: 60px;
                     font-weight: 500;
-                    font-family: 'Sacramento', cursive; color: {{ font_color }};"
+                    font-family: Lato, serif; color: {{ font_color }};"
                 class="padding-copy" align="center">
                 Please click on the "View Invitation" button below for more information and to RSVP!<br>
             </td>
@@ -55,7 +55,7 @@
         <tr><td style="
                     padding: 20px 0 0 0; font-size: 35px; line-height: 60px;
                     font-weight: 500;
-                    font-family: 'Sacramento', cursive; color: {{ font_color }};"
+                    font-family: Lato, serif; color: {{ font_color }};"
                 class="padding-copy" align="center">
             The favor of your reply is requested by Saturday October 26th, 2019.
         </td></tr>
@@ -63,8 +63,8 @@
         <tr>
             <td>
                 <a href="{% if email_mode %}{{ site_url }}{% endif %}{% url 'invitation' invitation_id %}" target="_blank"
-                   style="font-size: 20px;
-                   font-family: Helvetica, Arial, sans-serif;
+                   style="font-size: 30px;
+                   font-family: Lato, serif;
                    color: #ffffff; text-decoration: none;
                    border-radius: 3px;
                    -webkit-border-radius: 3px;
