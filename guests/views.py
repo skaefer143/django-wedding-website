@@ -64,6 +64,7 @@ def dashboard(request):
         'total_invites': Party.objects.filter(is_invited=True).count(),
         # 'meal_breakdown': meal_breakdown,
         'category_breakdown': category_breakdown,
+        'attending_guests': attending_guests,
     })
 
 
