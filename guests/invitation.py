@@ -1,5 +1,7 @@
 from email.mime.image import MIMEImage
 import os
+from time import sleep
+
 from django.conf import settings
 from django.core.mail import EmailMultiAlternatives
 from django.urls import reverse
@@ -43,7 +45,7 @@ def send_invitation_email(party, test_only=False, recipients=None):
     if recipients is None:
         recipients = party.guest_emails
     if not recipients:
-        print ('===== WARNING: no valid email addresses found for {} ====='.format(party))
+        print('===== WARNING: no valid email addresses found for {} ====='.format(party))
         return
 
     context = get_invitation_context(party)
@@ -70,7 +72,11 @@ def send_invitation_email(party, test_only=False, recipients=None):
 
     print('sending invitation to {} ({})'.format(party.name, ', '.join(recipients)))
     if not test_only:
-        msg.send()
+        try:
+            msg.send()
+        except:
+            sleep(3)  # try again
+            msg.send()
 
 
 def send_all_invitations(test_only, mark_as_sent):
