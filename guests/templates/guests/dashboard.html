@@ -61,13 +61,13 @@
                     </tr>
                 {% else %}
                     <tbody>
+                    {% for guest in attending_guests %}
                         <tr>
-                            {% for guest in attending_guests %}
                             <td>{{ guest.name }}</td>
-                                <td>{{ guest.party }}</td>
-                                <td>{{ guest.email }}</td>
-                            {% endfor %}
+                            <td>{{ guest.party }}</td>
+                            <td>{{ guest.email }}</td>
                         </tr>
+                    {% endfor %}
                     </tbody>
                 {% endif %}
                 </table>
