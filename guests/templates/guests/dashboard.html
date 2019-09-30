@@ -61,7 +61,7 @@
                             <td>{{ party.name }}</td>
                             <td>{{ party.category }}</td>
                             <td>{{ party.is_attending }}</td>
-                            <td>{{ party.comments }}</td>
+                            <td style="width:422px;">{{ party.comments|default_if_none:"" }}</td>
                             <td>{{ party.responded_to_invitation }}</td>
                         </tr>
                     {% endfor %}
