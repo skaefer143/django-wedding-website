@@ -48,18 +48,20 @@
         </div>
         <div class="row">
             <div class="col-lg-12">
-                <h1>Attending Parties</h1>
+                <h1>Responded Parties</h1>
                 <table class="table">
-                {% if attending_parties.count == 0 %}
+                {% if responded_parties.count == 0 %}
                     <tr>
-                        <td>No Parties Attending Yet</td>
+                        <td>No Parties Responded Attending Yet</td>
                     </tr>
                 {% else %}
                     <tbody>
-                    {% for party in attending_parties %}
+                    {% for party in responded_parties %}
                         <tr>
                             <td>{{ party.name }}</td>
                             <td>{{ party.category }}</td>
+                            <td>{{ party.is_attending }}</td>
+                            <td>{{ party.comments }}</td>
                             <td>{{ party.responded_to_invitation }}</td>
                         </tr>
                     {% endfor %}

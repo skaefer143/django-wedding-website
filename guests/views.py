@@ -37,7 +37,7 @@ def dashboard(request):
     parties_with_unopen_invites = parties_with_pending_invites.filter(invitation_opened=None)
     parties_with_open_unresponded_invites = parties_with_pending_invites.exclude(invitation_opened=None)
     attending_guests = Guest.objects.filter(is_attending=True)
-    attending_parties = Party.objects.filter(is_attending=True)
+    responded_parties = Party.objects.filter(responded_to_invitation__isnull=False)
     # guests_without_meals = attending_guests.filter(
     #     is_child=False
     # ).filter(
@@ -65,7 +65,7 @@ def dashboard(request):
         'total_invites': Party.objects.filter(is_invited=True).count(),
         # 'meal_breakdown': meal_breakdown,
         'category_breakdown': category_breakdown,
-        'attending_parties': attending_parties.order_by('category', 'name', 'responded_to_invitation'),
+        'responded_parties': responded_parties.order_by('category', 'name', 'responded_to_invitation'),
     })
 
 
