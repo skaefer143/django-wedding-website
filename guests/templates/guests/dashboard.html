@@ -55,6 +55,13 @@
                         <td>No Parties Responded Attending Yet</td>
                     </tr>
                 {% else %}
+                    <thead><tr>
+                        <td>Name</td>
+                        <td>Category</td>
+                        <td>Is Attending</td>
+                        <td>Comments</td>
+                        <td>Date Responded</td>
+                    </tr></thead>
                     <tbody>
                     {% for party in responded_parties %}
                         <tr>
