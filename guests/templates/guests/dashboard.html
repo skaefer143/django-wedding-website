@@ -39,6 +39,7 @@
                             <td>{{ guest.name }}</td>
                             <td>{{ guest.party }}</td>
                             <td>{{ guest.email }}</td>
+                            <td>{{ guest.party.comments|default_if_none:"" }}</td>
                         </tr>
                     {% endfor %}
                     </tbody>

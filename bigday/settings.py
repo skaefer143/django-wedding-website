@@ -151,6 +151,25 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 WIP_PAGE = False  # Set to False when not working on the WIP Page.
 
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': '/home/skaefer/src/django-wedding-website/debug.log',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['file'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+    },
+}
+
 try:
     from .localsettings import *
 except ImportError:

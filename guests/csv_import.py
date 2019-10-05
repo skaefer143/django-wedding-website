@@ -61,13 +61,10 @@ def export_guests():
                     party.name,
                     guest.first_name,
                     guest.last_name,
-                    party.type,
-                    guest.is_child,
                     party.category,
                     party.is_invited,
                     guest.is_attending,
                     party.rehearsal_dinner,
-                    guest.meal,
                     guest.email,
                     guest.notes,
                 ])
