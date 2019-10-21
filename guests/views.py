@@ -74,6 +74,9 @@ def invitation(request, invite_id):
     if party.invitation_opened is None:
         # update if this is the first time the invitation was opened
         party.invitation_opened = timezone.now()
+        if party.follow_up_opened is None:
+            # To track the follow up being opened too
+            party.follow_up_opened = timezone.now()
         party.save()
     if request.method == 'POST':
         for response in _parse_invite_params(request.POST):
@@ -133,6 +136,20 @@ def invitation_email_preview(request, invite_id):
 
 @login_required
 def invitation_email_test(request, invite_id):
+    party = guess_party_by_invite_id_or_404(invite_id)
+    send_invitation_email(party, recipients=[settings.DEFAULT_WEDDING_TEST_EMAIL])
+    return HttpResponse('sent!')
+
+
+@login_required
+def follow_up_email_preview(request, invite_id):
+    party = guess_party_by_invite_id_or_404(invite_id)
+    context = get_invitation_context(party)
+    return render(request, INVITATION_TEMPLATE, context=context)
+
+
+@login_required
+def follow_up_email_test(request, invite_id):
     party = guess_party_by_invite_id_or_404(invite_id)
     send_invitation_email(party, recipients=[settings.DEFAULT_WEDDING_TEST_EMAIL])
     return HttpResponse('sent!')

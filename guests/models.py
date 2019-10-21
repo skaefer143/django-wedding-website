@@ -31,6 +31,8 @@ class Party(models.Model):
     invitation_sent = models.DateTimeField(null=True, blank=True, default=None)
     invitation_opened = models.DateTimeField(null=True, blank=True, default=None)
     responded_to_invitation = models.DateTimeField(null=True, blank=True, default=None)
+    follow_up_sent = models.DateTimeField(null=True, blank=True, default=None)
+    follow_up_opened = models.DateTimeField(null=True, blank=True, default=None)
     is_invited = models.BooleanField(default=False)
     rehearsal_dinner = models.BooleanField(default=False)
     is_attending = models.NullBooleanField(default=None)
