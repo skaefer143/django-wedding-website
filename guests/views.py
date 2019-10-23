@@ -66,7 +66,7 @@ def dashboard(request):
         'total_invites': Party.objects.filter(is_invited=True).count(),
         # 'meal_breakdown': meal_breakdown,
         'category_breakdown': category_breakdown,
-        'responded_parties': responded_parties.order_by('category', 'name', 'responded_to_invitation'),
+        'responded_parties': responded_parties.order_by('category', '-responded_to_invitation'),
     })
 
 
