@@ -68,7 +68,7 @@ def send_follow_up_email(party, test_only=False, recipients=None):
 
 
 def send_all_follow_ups(test_only, mark_as_sent):
-    to_send_to = Party.in_default_order().filter(is_invited=True, is_attending=None, invitation_sent__isnull=False)\
+    to_send_to = Party.in_default_order().filter(is_invited=True, is_attending=None, invitation_sent__isnull=False, follow_up_sent__isnull=True)\
         .exclude(responded_to_invitation__isnull=False)
     for party in to_send_to:
         send_follow_up_email(party, test_only=test_only)
