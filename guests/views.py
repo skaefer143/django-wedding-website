@@ -10,6 +10,7 @@ from django.shortcuts import render
 from django.utils import timezone
 from django.views.generic import ListView
 from guests import csv_import
+from guests.follow_up import send_follow_up_email, FOLLOW_UP_TEMPLATE, get_follow_up_context
 from guests.invitation import get_invitation_context, INVITATION_TEMPLATE, guess_party_by_invite_id_or_404, \
     send_invitation_email
 from guests.models import Guest, MEALS, Party
@@ -144,14 +145,14 @@ def invitation_email_test(request, invite_id):
 @login_required
 def follow_up_email_preview(request, invite_id):
     party = guess_party_by_invite_id_or_404(invite_id)
-    context = get_invitation_context(party)
-    return render(request, INVITATION_TEMPLATE, context=context)
+    context = get_follow_up_context(party)
+    return render(request, FOLLOW_UP_TEMPLATE, context=context)
 
 
 @login_required
 def follow_up_email_test(request, invite_id):
     party = guess_party_by_invite_id_or_404(invite_id)
-    send_invitation_email(party, recipients=[settings.DEFAULT_WEDDING_TEST_EMAIL])
+    send_follow_up_email(party, recipients=[settings.DEFAULT_WEDDING_TEST_EMAIL])
     return HttpResponse('sent!')
 
 

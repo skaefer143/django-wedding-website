@@ -1,7 +1,6 @@
-from optparse import make_option
 from django.core.management import BaseCommand
-from guests import csv_import
-from guests.invitation import send_all_invitations
+
+from guests.follow_up import send_all_follow_ups
 
 
 class Command(BaseCommand):
@@ -32,4 +31,4 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         if options['reset']:
             raise NotImplementedError
-        send_all_invitations(test_only=not options['send'], mark_as_sent=options['mark_sent'])
+        send_all_follow_ups(test_only=not options['send'], mark_as_sent=options['mark_sent'])
