@@ -19,7 +19,7 @@
         {% if not party.responded_to_invitation %}
         <form id="invitation-details" class="form-horizontal" method="post">
             <h2 id="rsvp-header" class="text-center">RSVP</h2>
-            <div class="clearfix" style="text-align: center;">Please submit this form by October 26th, 2019</div>
+            <div class="clearfix" style="text-align: center;">Please submit this form by November 20th, 2019</div>
             <p></p>
             {% csrf_token %}
             {% for guest in party.ordered_guests.all %}
