@@ -82,7 +82,6 @@
     </table>
 {% endblock %}
 {% block footer_content %}
-    Please <a href="{% if email_mode %}{{ site_url }}{% endif %}{% url 'invitation' invitation_id %}">view the invitation online</a> to rsvp.<br>
     {% if email_mode %}
         <p><a href="{{ site_url }}">{{ site_url }}</a></p>
     {% endif %}
