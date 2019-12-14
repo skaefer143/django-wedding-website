@@ -37,7 +37,7 @@
                     {% for guest in not_coming_guests %}
                         <tr>
                             <td>{{ guest.name }}</td>
-                            <td>{{ guest.party }}</td>
+                            <td><a href="{% url 'admin:guests_party_change' guest.party.pk %}" >{{ guest.party }}</a></td>
                             <td>{{ guest.email }}</td>
                             <td>{{ guest.party.comments|default_if_none:"" }}</td>
                         </tr>
@@ -66,7 +66,7 @@
                     <tbody>
                     {% for party in responded_parties %}
                         <tr>
-                            <td>{{ party.name }}</td>
+                            <td><a href="{% url 'admin:guests_party_change' party.pk %}" >{{ party.name }}</a></td>
                             <td>{{ party.category }}</td>
                             <td>{{ party.is_attending }}</td>
                             <td style="width:422px;">{{ party.comments|default_if_none:"" }}</td>
