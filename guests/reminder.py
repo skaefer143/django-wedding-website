@@ -68,7 +68,7 @@ def send_reminder_email(party, test_only=False, recipients=None):
 
 
 def send_all_reminders(test_only, mark_as_sent):
-    to_send_to = Party.in_default_order().filter(is_invited=True, is_attending=True)
+    to_send_to = Party.in_default_order().filter(is_invited=True, is_attending=True, reminder_sent__isnull=True)
     for party in to_send_to:
         send_reminder_email(party, test_only=test_only)
         if mark_as_sent:
