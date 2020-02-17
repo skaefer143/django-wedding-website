@@ -135,7 +135,7 @@ aside {
     }
 
     .navbar-default .navbar-header .navbar-brand {
-        color: rgba(28,56,81,.7);
+        color: #fff;
     }
 
     .navbar-default .navbar-header .navbar-brand:hover,
@@ -145,7 +145,7 @@ aside {
 
     .navbar-default .nav > li>a,
     .navbar-default .nav>li>a:focus {
-        color: rgba(28,56,81,.7);
+        color: #fff;
     }
 
     .navbar-default .nav > li>a:hover,
