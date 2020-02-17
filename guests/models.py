@@ -34,6 +34,8 @@ class Party(models.Model):
     follow_up_sent = models.DateTimeField(null=True, blank=True, default=None)
     follow_up_opened = models.DateTimeField(null=True, blank=True, default=None)
     reminder_sent = models.DateTimeField(null=True, blank=True, default=None)
+    thank_you_sent = models.DateTimeField(null=True, blank=True, default=None)
+    received_gifts = models.CharField(max_length=256, blank=True, null=True)
     is_invited = models.BooleanField(default=False)
     rehearsal_dinner = models.BooleanField(default=False)
     is_attending = models.NullBooleanField(default=None)
