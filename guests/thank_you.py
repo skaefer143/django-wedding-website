@@ -17,7 +17,7 @@ THANK_YOU_TEMPLATE = 'guests/email_templates/thank_you.html'
 def get_thank_you_context(party):
     return {
         'title': "Storm and Elise",
-        'main_image': 'Storm_and_Elise_0061.jpg', # TODO change photo
+        'main_image': 'Formals-337-EE-crop-min.jpg',
         'main_color': '#ecf7fe',
         'font_color': '#454040',
         'page_title': "{} - Thank you for coming!".format(settings.GROOM_AND_BRIDE),
@@ -25,7 +25,6 @@ def get_thank_you_context(party):
         'party': party,
         'site_url': settings.WEDDING_WEBSITE_URL,
         'couple': settings.GROOM_AND_BRIDE
-        # TODO: favorite wedding photo album and URL to album? Track the clicks?
     }
 
 
