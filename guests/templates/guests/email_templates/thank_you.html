@@ -8,8 +8,8 @@
                 <tbody>
                 <tr>
                     <td class="padding-copy" align="center" style="
-                            padding: 20px 0 0 0; font-size: 40px; line-height: 50px; font-weight: 500;
-                            font-family: Lato, serif; color: {{ font_color }};">
+                            padding: 20px 0 0 0; font-size: 50px; line-height: 50px; font-weight: 500;
+                            font-family: Caveat, Georgia, sans-serif; color: {{ font_color }};">
                         Dear {% for guest in party.ordered_guests.all %}{% if party.ordered_guests.all.count >= 2 and forloop.last %} and {% endif %} {{ guest.first_name }}{% endfor %},<br><br>
                     </td>
                 </tr>
@@ -41,9 +41,9 @@
             {% include 'guests/thank_you_partials/not_at_wedding_with_gift.html' %}
         {% endif %}
         <tr><td style="
-                    padding: 20px 0 0 0; font-size: 25px; line-height: 50px;
+                    padding: 20px 0 0 0; font-size: 35px; line-height: 50px;
                     font-weight: 500;
-                    font-family: Lato, serif; color: {{ font_color }};"
+                    font-family: Caveat, Georgia, sans-serif; color: {{ font_color }};"
                 class="padding-copy" align="center">
         Love, Storm and Elise
         </td></tr>

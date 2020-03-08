@@ -18,7 +18,7 @@ def get_thank_you_context(party):
     return {
         'title': "Storm and Elise",
         'main_image': 'Formals-337-EE-crop-min.jpg',
-        'main_color': '#ecf7fe',
+        'main_color': '#ffffff',
         'font_color': '#454040',
         'page_title': "{} - Thank you for coming!".format(settings.GROOM_AND_BRIDE),
         'invitation_id': party.invitation_id,
