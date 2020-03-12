@@ -72,7 +72,6 @@ def send_all_thank_you(test_only, mark_as_sent):
     no_gift_received = Q(received_gifts__isnull=True) | Q(received_gifts='')
     to_send_to = Party.in_default_order().filter(is_invited=True, receives_a_thank_you_note=True,
                                                  thank_you_sent__isnull=True).exclude(not_attending & no_gift_received)
-    # TODO double check this query when data sanitation is complete
     for party in to_send_to:
         send_thank_you_email(party, test_only=test_only)
         if mark_as_sent:

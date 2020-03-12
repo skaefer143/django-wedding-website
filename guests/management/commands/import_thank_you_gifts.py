@@ -27,10 +27,10 @@ def import_thank_you_notes(path):
                 print('skipping row {}'.format(row))
                 continue
             party = Party.objects.get(pk=party_pk)
-            if gift:
-                party.received_gifts = gift
-            if extra_sentence:
-                party.thank_you_extra_sentence = extra_sentence
+            if gift and gift.strip():
+                party.received_gifts = gift.strip()
+            if extra_sentence and extra_sentence.strip():
+                party.thank_you_extra_sentence = extra_sentence.strip()
             if send_a_thank_you_note == 'FALSE':
                 party.receives_a_thank_you_note = False
             party.save()
