@@ -22,11 +22,15 @@ def import_thank_you_notes(path):
             if first_row:
                 first_row = False
                 continue
-            party_pk, wedding_party_name, attended, gift, extra_sentence, send_a_thank_you_note = row[:6]
+            party_pk, party_name, attended, gift, extra_sentence, send_a_thank_you_note = row[:6]
             if not party_pk:
                 print('skipping row {}'.format(row))
                 continue
-            party = Party.objects.get(pk=party_pk)
+            try:
+                party = Party.objects.get(pk=party_pk)
+            except Party.DoesNotExist:
+                print("Couldn't find party with pk {} and name {}.".format(party_pk, party_name))
+                continue
             if gift and gift.strip():
                 party.received_gifts = gift.strip()
             if extra_sentence and extra_sentence.strip():
