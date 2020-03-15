@@ -172,7 +172,6 @@ def reminder_email_test(request, invite_id):
     return HttpResponse('sent!')
 
 
-@login_required
 def thank_you_email_preview(request, invite_id):
     party = guess_party_by_invite_id_or_404(invite_id)
     context = get_thank_you_context(party)
