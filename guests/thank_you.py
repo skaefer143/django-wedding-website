@@ -20,7 +20,7 @@ def get_thank_you_context(party):
         'main_image': 'Formals-337-EE-crop-min.jpg',
         'main_color': '#ffffff',
         'font_color': '#454040',
-        'page_title': "{} - Thank you for coming!".format(settings.GROOM_AND_BRIDE),
+        'page_title': "{} - Thank you!".format(settings.GROOM_AND_BRIDE),
         'invitation_id': party.invitation_id,
         'party': party,
         'site_url': settings.WEDDING_WEBSITE_URL,
